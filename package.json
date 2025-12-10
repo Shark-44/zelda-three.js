@@ -1,0 +1,13 @@
+{
+	"name": "zelda",
+	"scripts": {
+		"dev": "vite"
+	},
+	"devDependencies": {
+		"vite": "^7.2.7"
+	},
+	"dependencies": {
+		"@dimforge/rapier3d-compat": "^0.19.3",
+		"three": "^0.181.2"
+	}
+}
