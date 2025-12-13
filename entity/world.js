@@ -1,14 +1,17 @@
 import { Object3D } from "three";
+import { createRigidBodyFixed } from "../tool/function";
 
 export default class Worlds extends Object3D {
-    constructor(visuals, colliders) {
+    constructor(meshes, colliders, physic) {
         super()
-        this.initPhysic(colliders)
-        this.initVisual(visuals)
+        this.initPhysic(colliders, physic)
+        this.initVisual(meshes)
     }
 
-    initPhysic() {
-
+    initPhysic(meshes, physic) {
+        for(const mesh of meshes) {
+            createRigidBodyFixed(mesh, physic)
+        }
     }
 
     initVisual(meshes) {
