@@ -1,12 +1,12 @@
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
-
+import { browse } from './function'
 const loaderGlb = new GLTFLoader()
 
-export default async function loadAssets(path) {
+export async function loaderWorld(path) {
     const glb = await loaderGlb.loadAsync(path)
     const visuals = []
     const colliders = []
-    const players = []
+
 
     for( const mesh of glb.scene.children){
         const name = mesh.name
@@ -14,10 +14,17 @@ export default async function loadAssets(path) {
             visuals.push(mesh)
         }else if(name.includes('collider')) {
             colliders.push(mesh)
-        }else if(name.includes('player')) {
-            players.push(mesh)
         }
     }
     
-    return {visuals, colliders, players}
+    return {visuals, colliders}
 }
+
+export async function loaderEntity(path) {
+    const glb = await loaderGlb.loadAsync(path)
+    const mesh = glb.scene.children[0]
+    browse(mesh, m=>m.castShadow=true)
+    mesh.clips = glb.animations
+    return mesh
+}
+    
